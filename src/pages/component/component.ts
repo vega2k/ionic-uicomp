@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import {
-  ActionSheetController, AlertController, IonicPage, ModalController, NavController, NavParams,
+  ActionSheetController, AlertController, IonicPage, LoadingController, ModalController, NavController, NavParams,
   Platform, ToastController
 } from 'ionic-angular';
 import {ModalPage} from "../modal/modal";
 import {AccountInterface} from "../../interfaces/account";
+import {LoaderProvider} from "../../providers/loader/loader";
 
 /**
  * Generated class for the ComponentPage page.
@@ -26,6 +27,7 @@ export class ComponentPage {
               public modalCtrl: ModalController,
               public alertCtrl: AlertController,
               public toastCtrl: ToastController,
+              public loaderProvider:LoaderProvider,
               public platform: Platform,
               public navParams: NavParams) {
   }
@@ -124,4 +126,15 @@ export class ComponentPage {
     toast.present();
   }
 
+  loading() {
+    // let loading = this.loadingCtrl.create({
+    //   content:'잠시만 기다려 주세요..'
+    // });
+    // loading.present();
+    this.loaderProvider.show();
+
+    setTimeout(() => {
+      this.loaderProvider.hide();
+    },3000);
+  }
 }
